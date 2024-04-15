@@ -22,7 +22,7 @@ def openai_response(query):
     params = {
         "messages": [{"role": role, "content": prompt}],
         # 如果需要切换模型，在这里修改
-        "model": "gpt-3.5-turbo",
+        "model": config["model"],
     }
     headers = {
         "Authorization": "Bearer " + api_key,
@@ -46,5 +46,8 @@ async def get_chatgpt_response(query: Query):
 
 
 if __name__ == "__main__":
+    logger.info("GPT Server Config: ")
+    logger.info(config)
+
     logger.info("Starting gpt server")
-    uvicorn.run(app, host="0.0.0.0", port="8002")
+    uvicorn.run(app, host=config["host"], port=config["port"])
