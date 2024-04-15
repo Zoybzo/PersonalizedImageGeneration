@@ -2,8 +2,9 @@ import requests as requests
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-
 from loguru import logger
+
+from config import gpt_config as config
 
 app = FastAPI()
 
@@ -45,4 +46,5 @@ async def get_chatgpt_response(query: Query):
 
 
 if __name__ == "__main__":
+    logger.info("Starting gpt server")
     uvicorn.run(app, host="0.0.0.0", port="8002")
