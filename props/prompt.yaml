@@ -1,0 +1,10 @@
+# Server
+host: 0.0.0.0
+port: 8003
+# Beauty
+beauty_raw_path: '/home/ubuntu/os/lllrrr/Datasets/item_agent/raw/Beauty.json'
+beauty_item_tree_path: '/home/ubuntu/os/lllrrr/Datasets/item_agent/planning_tree/item_tree.json'
+# Image
+image_extractor_url: "http://127.0.0.1:8001/internlm-xcomposer"
+image_extractor_llm_name: "InternLm-Xcomposer-7B"
+
