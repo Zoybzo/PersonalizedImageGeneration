@@ -1,16 +1,50 @@
-# This is a sample Python script.
+import uvicorn
+from fastapi import FastAPI
+from pydantic import BaseModel
+from loguru import logger
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from config import server_config as config
+
+app = FastAPI()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class ListQuery(BaseModel):
+    api_key: str  # 是否为多轮对话
+    id_list: list
+    prompt: str
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+class IDQuery(BaseModel):
+    api_key: str  # 是否为多轮对话
+    user_id: str
+    prompt: str
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def _generate_image_list(query):
+    pass
+
+
+def _generate_image_id(query):
+    pass
+
+
+@app.post("/generateByList")
+async def generate_image_list(query: ListQuery):
+    response = _generate_image_list(query)
+    ret = {"response": response}
+    return ret
+
+
+@app.post("/generateByID")
+async def generate_image_id(query: IDQuery):
+    response = _generate_image_id(query)
+    ret = {"response": response}
+    return ret
+
+
+if __name__ == "__main__":
+    logger.info("Server Config: ")
+    logger.info(config)
+
+    logger.info("Starting server")
+    uvicorn.run(app, host=config["host"], port=config["port"])

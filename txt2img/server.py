@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from loguru import logger
 
 from txt2img.image_generator import ImageGenerator
-from gpt import ChatGPT
 from config import txt2img_config as config
 
 
@@ -15,7 +14,7 @@ class Query(BaseModel):  # 定义请求参数, 用于接收前端传来的参数
     prompt: str
 
 
-def generate_image(query):
+def _generate_image(query):
     # Parameters
     prompt = query.prompt
     # Models
@@ -26,8 +25,8 @@ def generate_image(query):
 
 
 @app.post("/generate_image")
-async def get_image(query: Query):
-    response = generate_image(query)
+async def generate_image(query: Query):
+    response = _generate_image(query)
     ret = {"response": response}
     return ret
 
