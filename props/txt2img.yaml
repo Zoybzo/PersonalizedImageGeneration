@@ -1,2 +1,5 @@
+# server
+host: 0.0.0.0
+port: 8004
 #model
 T2I_model_path: '/home/zhanghexin/PersopnalizeImageGeneration/playgroundai/playground-v2.5-1024px-aesthetic/'

@@ -1,4 +1,5 @@
 import os
+import time
 
 from diffusers import DiffusionPipeline
 import torch

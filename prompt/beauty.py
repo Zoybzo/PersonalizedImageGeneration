@@ -5,17 +5,16 @@
 import os
 import json
 
-from loguru import logger as loguru_logger
+from loguru import logger
 
 from gpt import ChatGPT
 from data.amazon import get_data_from_id, load_json_to_tree
 from prompt.create_prompt import (
     create_template_chain,
     beauty_item_template,
-    descript_single_beauty,
-    user_profiler_templete,
-    descript_user_profile,
+    user_profile_templete,
 )
+from prompt.llmchain import descript_single_beauty, descript_user_profile
 from config import prompt_config as config
 
 
@@ -83,7 +82,7 @@ class Beauty:
     def get_user_profile(self, id_seq):
         history = self.from_idseq_get_history(id_seq)
         item = "Beauty"
-        prompt = user_profiler_templete(item, history)
+        prompt = user_profile_templete(item, history)
         result = descript_user_profile("user", prompt, self.api_key, self.brain_llm)
         return result
 
@@ -98,6 +97,8 @@ def get_Beauty_instance():
 
 
 if __name__ == "__main__":
+    # Show config
+    logger.info(config)
     # Data Path
     meta = config["beauty_raw_path"]
     tree = config["beauty_item_tree_path"]

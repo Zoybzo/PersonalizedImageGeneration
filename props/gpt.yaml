@@ -1,6 +1,6 @@
 # Server
 host: 0.0.0.0
-part: 8002
+port: 8002
 
 model: "gpt-3.5-turbo"
 # GPT  

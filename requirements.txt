@@ -1,3 +1,5 @@
+treelib
+langchain
 requests
 fastapi
 pydantic
@@ -5,3 +7,4 @@ uvicorn
 loguru
 pyyaml
 tqdm
+jsonlines

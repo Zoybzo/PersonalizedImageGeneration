@@ -4,7 +4,7 @@ import json
 from pprint import pprint
 from tqdm import tqdm
 
-from data.amazon import _parse_gz_line
+from data.amazon.process import _parse_gz_line
 
 
 def get_metadata(meta_file, output_file):

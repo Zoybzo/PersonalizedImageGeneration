@@ -2,7 +2,7 @@ import json
 
 from treelib import Tree, Node
 
-from data.amazon.JsonTree import get_tree
+from data.amazon.jsontree import get_tree
 
 CATEGORY = [
     "Clothing",

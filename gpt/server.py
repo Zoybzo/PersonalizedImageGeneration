@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import uvicorn
 from loguru import logger
 
-from config import gpt_conig as config
+from config import gpt_config as config
 
 app = FastAPI()
 
