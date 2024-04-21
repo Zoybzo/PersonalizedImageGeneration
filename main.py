@@ -7,6 +7,8 @@ from gpt import ChatGPT
 from txt2img.image_generator import ImageGenerator
 from prompt.beauty import Beauty
 from config import server_config as config
+from config import prompt_config as prompt_config
+from config import txt2img_config as txt2img_config
 
 app = FastAPI()
 
@@ -53,9 +55,9 @@ def _generate_image_by_id(user_id, prompt):
 
 def _get_brain_model():
     brain = Beauty(
-        config["beauty_raw_path"],
-        config["beauty_item_tree_path"],
-        config["api_key"],
+        prompt_config["beauty_raw_path"],
+        prompt_config["beauty_item_tree_path"],
+        prompt_config["api_key"],
         None,
         ChatGPT(),
     )
@@ -63,7 +65,7 @@ def _get_brain_model():
 
 
 def _get_image_model():
-    return ImageGenerator(config)
+    return ImageGenerator(txt2img_config)
 
 
 def _generate_image(query):
@@ -109,9 +111,11 @@ async def generate_image(query: Query):
 if __name__ == "__main__":
     logger.info("Server Config: ")
     logger.info(config)
+    logger.info("Text2Image Config: ")
+    logger.info(txt2img_config)
     logger.info("Loading models")
     global image_model, brain_model
     brain_model = _get_brain_model()
-    image_model = ImageGenerator(config)
+    image_model = _get_image_model()
     logger.info("Starting server")
     uvicorn.run(app, host=config["host"], port=config["port"])
